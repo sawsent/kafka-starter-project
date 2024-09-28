@@ -6,4 +6,6 @@ object Message {
   }
 }
 
-case class Message[K, V](key: K, value: V) {}
+case class Message[K, V](key: K, value: V) {
+  override def toString: String = s"Message{ key: '$key', value: '$value' }"
+}
