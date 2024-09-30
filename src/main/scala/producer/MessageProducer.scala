@@ -1,22 +1,19 @@
 package producer
 
-import MessageProducer.logger
-import logging.LoggerFactory
+import logging.GlobalLogging
 import model.Message
 import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerRecord, RecordMetadata}
-import org.apache.logging.log4j.Logger
 
 import java.util.Properties
 
 object MessageProducer {
-  private val logger: Logger = LoggerFactory("MessageProducer")
 
   def apply(topic: String, props: Properties): MessageProducer = {
     new MessageProducer(topic, props)
   }
 }
 
-class MessageProducer(val topic: String, val props: Properties) {
+class MessageProducer(val topic: String, val props: Properties) extends GlobalLogging {
 
   private val producer = new KafkaProducer[String, String](props)
 

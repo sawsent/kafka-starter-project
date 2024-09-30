@@ -1,17 +1,14 @@
 package app
 
 import config.KafkaConfig
-import logging.GlobalLogger.logger
-import logging.LoggerFactory
+import logging.GlobalLogging
 import model.Message
-import org.apache.logging.log4j.{LogManager, Logger}
 import producer.MessageProducer
 
 import scala.io.StdIn
 
 
-object App extends App {
-  private val logger = LoggerFactory("App")
+object App extends App with GlobalLogging {
 
   private val producer = MessageProducer(KafkaConfig.TOPIC, KafkaConfig.producerProperties)
 

@@ -1,17 +1,14 @@
 package consumer
 
-import MessageConsumer.POLL_TIMEOUT_DURATION
-import logging.LoggerFactory
+import consumer.MessageConsumer.POLL_TIMEOUT_DURATION
+import logging.GlobalLogging
 import model.Message
 import org.apache.kafka.clients.consumer.KafkaConsumer
-import MessageConsumer.logger
-import org.apache.logging.log4j.Logger
 
 import java.time.Duration
 import java.util.{Collections, Properties}
 
 object MessageConsumer {
-  private val logger: Logger = LoggerFactory("MessageConsumer")
   private val POLL_TIMEOUT_DURATION: Duration = Duration.ofMillis(100)
 
   def apply(topic: String, props: Properties): MessageConsumer = {
@@ -19,7 +16,7 @@ object MessageConsumer {
   }
 }
 
-class MessageConsumer(val topic: String, val props: Properties) {
+class MessageConsumer(val topic: String, val props: Properties) extends GlobalLogging {
 
   val consumer = new KafkaConsumer[String, String](props)
   consumer.subscribe(Collections.singletonList(topic))
